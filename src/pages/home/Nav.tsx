@@ -4,12 +4,18 @@ import {
   BreadcrumbLink,
   BreadcrumbProps,
   BreadcrumbSeparator,
+  HStack,
+  Icon,
+  Kbd,
 } from "@hope-ui/solid"
 import { Link } from "@solidjs/router"
 import { createMemo, For, Show } from "solid-js"
 import { usePath, useRouter, useT } from "~/hooks"
-import { getSetting, local } from "~/store"
-import { encodePath, hoverColor, joinBase } from "~/utils"
+import { getMainColor, getSetting, local, objStore, State } from "~/store"
+import { bus, encodePath, hoverColor, isMac, joinBase } from "~/utils"
+import { changeColor } from "seemly"
+import { BsSearch } from "solid-icons/bs"
+import { Layout } from "~/pages/home/header/layout"
 
 export const Nav = () => {
   const { pathname } = useRouter()
@@ -87,6 +93,36 @@ export const Nav = () => {
           )
         }}
       </For>
+      <HStack class="header-right" spacing="$2">
+        <Show when={objStore.state === State.Folder}>
+          <Show when={getSetting("search_index") !== "none"}>
+            <HStack
+              bg="$neutral4"
+              w="$32"
+              p="$1"
+              rounded="$md"
+              justifyContent="space-between"
+              border="2px solid transparent"
+              cursor="pointer"
+              color={getMainColor()}
+              bgColor={changeColor(getMainColor(), { alpha: 0.15 })}
+              _hover={{
+                bgColor: changeColor(getMainColor(), { alpha: 0.2 }),
+              }}
+              onClick={() => {
+                bus.emit("tool", "search")
+              }}
+            >
+              <Icon as={BsSearch} />
+              <HStack>
+                {isMac ? <Kbd>Cmd</Kbd> : <Kbd>Ctrl</Kbd>}
+                <Kbd>K</Kbd>
+              </HStack>
+            </HStack>
+          </Show>
+          <Layout />
+        </Show>
+      </HStack>
     </Breadcrumb>
   )
 }

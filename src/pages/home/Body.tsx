@@ -3,7 +3,6 @@ import { Nav } from "./Nav"
 import { Obj } from "./Obj"
 import { Readme } from "./Readme"
 import { Container } from "./Container"
-import { Sidebar } from "./Sidebar"
 
 export const Body = () => {
   return (
@@ -24,7 +23,6 @@ export const Body = () => {
           files={["readme.md", "footer.md", "bottom.md"]}
           fromMeta="readme"
         />
-        <Sidebar />
       </VStack>
     </Container>
   )

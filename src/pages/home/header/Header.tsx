@@ -44,46 +44,7 @@ export const Header = () => {
           py="$2"
           w="$full"
           justifyContent="space-between"
-        >
-          <HStack class="header-left" h="44px">
-            <Image
-              src={logo()!}
-              h="$full"
-              w="auto"
-              fallback={<CenterLoading />}
-            />
-          </HStack>
-          <HStack class="header-right" spacing="$2">
-            <Show when={objStore.state === State.Folder}>
-              <Show when={getSetting("search_index") !== "none"}>
-                <HStack
-                  bg="$neutral4"
-                  w="$32"
-                  p="$1"
-                  rounded="$md"
-                  justifyContent="space-between"
-                  border="2px solid transparent"
-                  cursor="pointer"
-                  color={getMainColor()}
-                  bgColor={changeColor(getMainColor(), { alpha: 0.15 })}
-                  _hover={{
-                    bgColor: changeColor(getMainColor(), { alpha: 0.2 }),
-                  }}
-                  onClick={() => {
-                    bus.emit("tool", "search")
-                  }}
-                >
-                  <Icon as={BsSearch} />
-                  <HStack>
-                    {isMac ? <Kbd>Cmd</Kbd> : <Kbd>Ctrl</Kbd>}
-                    <Kbd>K</Kbd>
-                  </HStack>
-                </HStack>
-              </Show>
-              <Layout />
-            </Show>
-          </HStack>
-        </HStack>
+        ></HStack>
       </Container>
     </Center>
   )

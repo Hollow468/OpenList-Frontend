@@ -34,6 +34,13 @@ const CommonSettings = lazy(() => import("./settings/Common"))
 
 export const side_menu_items: SideMenuItem[] = [
   {
+    title: "manage.sidemenu.home",
+    icon: IoHome,
+    to: "/",
+    role: UserRole.GUEST,
+    refresh: true,
+  },
+  {
     title: "manage.sidemenu.profile",
     icon: BsFingerprint,
     to: "/@manage",
@@ -98,6 +105,12 @@ export const side_menu_items: SideMenuItem[] = [
         icon: BsArrowLeftRight,
         to: "/@manage/settings/traffic",
         component: () => <CommonSettings group={Group.TRAFFIC} />,
+      },
+      {
+        title: "manage.sidemenu.backup-restore",
+        to: "/@manage/settings/backup-restore",
+        icon: FaSolidDatabase,
+        component: lazy(() => import("./backup-restore")),
       },
       {
         title: "manage.sidemenu.other",
@@ -185,32 +198,5 @@ export const side_menu_items: SideMenuItem[] = [
     icon: BsSearch,
     to: "/@manage/indexes",
     component: lazy(() => import("./indexes/indexes")),
-  },
-  {
-    title: "manage.sidemenu.backup-restore",
-    to: "/@manage/backup-restore",
-    icon: FaSolidDatabase,
-    component: lazy(() => import("./backup-restore")),
-  },
-  {
-    title: "manage.sidemenu.about",
-    icon: BsFront,
-    to: "/@manage/about",
-    role: UserRole.GUEST,
-    component: lazy(() => import("./About")),
-  },
-  {
-    title: "manage.sidemenu.docs",
-    icon: FaSolidBook,
-    to: "https://doc.oplist.org",
-    role: UserRole.GUEST,
-    external: true,
-  },
-  {
-    title: "manage.sidemenu.home",
-    icon: IoHome,
-    to: "/",
-    role: UserRole.GUEST,
-    refresh: true,
   },
 ]
