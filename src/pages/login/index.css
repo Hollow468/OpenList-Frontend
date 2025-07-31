@@ -1,0 +1,31 @@
+.input {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  width: 400px;
+  height: 69px;
+}
+.input:hover {
+  background: #ffffff;
+  border: 1px solid #8ac0ff;
+  border-radius: 10px;
+}
+.input:focus {
+  background: #ffffff;
+  border: 1px solid #8ac0ff;
+  border-radius: 10px;
+}
+
+.login {
+  background: #0366ff;
+  color: #ffffff;
+  width: 312px;
+  height: 62px;
+}
+
+.opt {
+  width: 131px;
+  height: 67px;
+  background: #f7f7f7;
+  border-radius: 4px;
+}

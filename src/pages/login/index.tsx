@@ -11,7 +11,9 @@ import {
   VStack,
   Checkbox,
   Icon,
+  Stack,
 } from "@hope-ui/solid"
+
 import { createMemo, createSignal, Show, onMount, onCleanup } from "solid-js"
 import { SwitchColorMode, SwitchLanguageWhite } from "~/components"
 import { useFetch, useT, useTitle, useRouter } from "~/hooks"
@@ -25,7 +27,7 @@ import {
   hashPwd,
 } from "~/utils"
 import { PResp, Resp } from "~/types"
-import LoginBg from "./LoginBg"
+
 import { createStorageSignal } from "@solid-primitives/storage"
 import { getSetting, getSettingBool } from "~/store"
 import { SSOLogin } from "./SSOLogin"
@@ -37,6 +39,8 @@ import {
   supported,
   CredentialRequestOptionsJSON,
 } from "@github/webauthn-json/browser-ponyfill"
+import "./index.css"
+import { fonts } from "@hope-ui/solid/dist/styled-system/tokens/typography"
 
 const Login = () => {
   const logos = getSetting("logo").split("\n")
@@ -220,20 +224,20 @@ const Login = () => {
   }
 
   return (
-    <Center zIndex="1" w="$full" h="100vh">
+    <Center zIndex="1" h="100vh">
       <VStack
         bgColor={bgColor()}
         rounded="$xl"
-        p="24px"
-        w={{
-          "@initial": "90%",
-          "@sm": "364px",
-        }}
+        p="29px"
+        h="590px"
+        w="585px"
+        borderRadius="4px"
         spacing="$4"
+        boxShadow="0px 4px 20px rgba(0, 0, 0, 0.1)"
       >
         <Flex alignItems="center" justifyContent="space-around">
-          <Image mr="$2" boxSize="$12" src={logo()} />
-          <Heading color="$info9" fontSize="$2xl">
+          <Heading color="$info" fontSize="$2xl" mb="$4">
+            <div style={{ height: "20px" }} />
             {title()}
           </Heading>
         </Flex>
@@ -256,6 +260,7 @@ const Login = () => {
         >
           <Input
             name="username"
+            class="input"
             placeholder={t("login.username-tips")}
             value={username()}
             onInput={(e) => setUsername(e.currentTarget.value)}
@@ -263,6 +268,7 @@ const Login = () => {
           <Show when={!useauthn()}>
             <Input
               name="password"
+              class="input"
               placeholder={t("login.password-tips")}
               type="password"
               value={password()}
@@ -276,7 +282,7 @@ const Login = () => {
           </Show>
           <Flex
             px="$1"
-            w="$full"
+            w="400px"
             fontSize="$sm"
             color="$neutral10"
             justifyContent="space-between"
@@ -290,29 +296,51 @@ const Login = () => {
             >
               {t("login.remember")}
             </Checkbox>
-            <Text as="a" target="_blank" href={t("login.forget_url")}>
-              {t("login.forget")}
-            </Text>
           </Flex>
         </Show>
-        <HStack w="$full" spacing="$2">
-          <Show when={!useauthn()}>
-            <Button
-              colorScheme="primary"
-              w="$full"
-              onClick={() => {
-                if (needOpt()) {
-                  setOpt("")
-                } else {
-                  setUsername("")
-                  setPassword("")
-                }
-              }}
+
+        <Stack alignItems="center" justifyContent="left" gap="12px">
+          <p>{t("login.other")}</p>
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="280"
+            height="2"
+            viewBox="0 0 304 2"
+            fill="none"
+          >
+            <line y1="1" x2="304" y2="1" stroke="#E7E7E7" stroke-width="2" />
+          </svg>
+        </Stack>
+
+        <Flex>
+          <Button class="opt">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 1024 1024"
+              p-id="3598"
+              width="46"
+              height="45"
             >
-              {t("login.clear")}
-            </Button>
-          </Show>
-          <Button w="$full" loading={loading()} onClick={Login}>
+              <path
+                d="M168 83.2L438.4 8c46.4-11.2 97.6-11.2 148.8 0l270.4 75.2c51.2 11.2 86.4 57.6 86.4 108.8v315.2c0 206.4-126.4 395.2-321.6 470.4L512 1024l-108.8-46.4C208 904 81.6 713.6 81.6 507.2V192c0-51.2 35.2-97.6 86.4-108.8zM512 937.6l80-33.6c161.6-62.4 270.4-220.8 270.4-395.2V192c0-12.8-8-27.2-24-30.4-1.6 0-3.2 0-3.2-1.6L568 86.4C547.2 81.6 528 80 510.4 80s-35.2 1.6-52.8 6.4L188.8 160c-1.6 0-3.2 0-3.2 1.6-16 3.2-24 17.6-24 30.4v315.2c0 174.4 108.8 334.4 270.4 395.2 1.6 0 1.6 0 3.2 1.6l76.8 33.6z"
+                fill="#0088FF"
+                p-id="3599"
+              />
+              <path
+                d="M664 531.2c16-16 43.2-16 59.2 0s16 43.2 0 59.2l-136 136c-16 16-43.2 16-59.2 0s-16-43.2 0-59.2l136-136z m-54.4-174.4c16-16 43.2-16 59.2 0s16 43.2 0 59.2L419.2 667.2c-16 16-43.2 16-59.2 0s-16-43.2 0-59.2l249.6-251.2z m-174.4-60.8c16-16 43.2-16 59.2 0s16 43.2 0 59.2l-136 131.2c-16 16-43.2 16-59.2 0s-16-43.2 0-59.2l136-131.2z"
+                fill="#8BD5FF"
+                p-id="3600"
+              />
+            </svg>
+          </Button>
+        </Flex>
+
+        <div style={{ height: "15px" }}></div>
+
+        <HStack w="400px" spacing="$3" justifyContent="center">
+          <Button w="$full" class="login" loading={loading()} onClick={Login}>
             {t("login.login")}
           </Button>
         </HStack>
@@ -325,19 +353,7 @@ const Login = () => {
             {ldapLoginTips}
           </Checkbox>
         </Show>
-        <Button
-          w="$full"
-          colorScheme="accent"
-          onClick={() => {
-            changeToken()
-            to(
-              decodeURIComponent(searchParams.redirect || base_path || "/"),
-              true,
-            )
-          }}
-        >
-          {t("login.use_guest")}
-        </Button>
+
         <Flex
           mt="$2"
           justifyContent="space-evenly"
@@ -345,9 +361,6 @@ const Login = () => {
           color="$neutral10"
           w="$full"
         >
-          <SwitchLanguageWhite />
-          <SwitchColorMode />
-          <SSOLogin />
           <Show when={AuthnSignEnabled}>
             <Icon
               cursor="pointer"
@@ -359,7 +372,6 @@ const Login = () => {
           </Show>
         </Flex>
       </VStack>
-      <LoginBg />
     </Center>
   )
 }
