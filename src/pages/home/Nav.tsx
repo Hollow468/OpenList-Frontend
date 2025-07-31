@@ -54,7 +54,14 @@ export const Nav = () => {
   })
 
   return (
-    <Breadcrumb {...stickyProps} background="$background" class="nav" w="$full">
+    <Breadcrumb
+      {...stickyProps}
+      background="$background"
+      class="nav"
+      w="$full"
+      display="grid"
+      gridTemplateColumns="1fr 1fr"
+    >
       <For each={paths()}>
         {(name, i) => {
           const isLast = createMemo(() => i() === paths().length - 1)
@@ -93,7 +100,7 @@ export const Nav = () => {
           )
         }}
       </For>
-      <HStack class="header-right" spacing="$2">
+      <HStack class="header-right">
         <Show when={objStore.state === State.Folder}>
           <Show when={getSetting("search_index") !== "none"}>
             <HStack

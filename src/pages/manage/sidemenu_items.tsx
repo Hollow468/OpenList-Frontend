@@ -24,6 +24,7 @@ import { Component, lazy } from "solid-js"
 import { Group, UserRole } from "~/types"
 import { FaSolidBook, FaSolidDatabase } from "solid-icons/fa"
 import { TbArchive } from "solid-icons/tb"
+import image from "~/pages/home/previews/image"
 
 export type SideMenuItem = SideMenuItemProps & {
   component?: Component
