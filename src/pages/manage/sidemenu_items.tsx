@@ -42,13 +42,6 @@ export const side_menu_items: SideMenuItem[] = [
     refresh: true,
   },
   {
-    title: "manage.sidemenu.profile",
-    icon: BsFingerprint,
-    to: "/@manage",
-    role: UserRole.GUEST,
-    component: lazy(() => import("./users/Profile")),
-  },
-  {
     title: "manage.sidemenu.settings",
     icon: BsGearFill,
     to: "/@manage/settings",

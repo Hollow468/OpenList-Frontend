@@ -84,6 +84,7 @@ const Index = () => {
           fromMeta="readme"
         />
       </VStack>
+      <Toolbar></Toolbar>
     </Box>
   )
 }

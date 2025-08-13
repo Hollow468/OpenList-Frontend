@@ -9,6 +9,5 @@
   "clear": "Clear",
   "login": "Login",
   "use_guest": "Browse as a guest",
-  "success": "Login successfully",
-  "other" :"Or continue with"
+  "success": "Login successfully"
 }

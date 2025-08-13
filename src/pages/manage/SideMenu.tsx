@@ -124,7 +124,14 @@ const SideMenuItemWithChildren = (props: SideMenuItemProps) => {
 
 export const SideMenu = (props: { items: SideMenuItemProps[] }) => {
   return (
-    <VStack p="$2" w="$full" color="$neutral11" spacing="$1">
+    <VStack
+      p="$2"
+      w="$full"
+      color="$neutral11"
+      spacing="$1"
+      height="100%"
+      overflowY="auto"
+    >
       <For each={props.items}>
         {(item) => {
           return <SideMenuItem {...item} />
